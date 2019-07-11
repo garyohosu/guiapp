@@ -22,6 +22,7 @@ class GuiApp:
     def __init__(self):
         self.version = "Ver0.00"
         self.title="Paramater Checker"
+        self.myDebug = False
         self.main()
 
     def main(self):
@@ -102,12 +103,12 @@ class GuiApp:
     def menu_option1(self):
         self.myDebug = True
         messagebox.showinfo("Debug mode","Debug ON")
-        self.txt.insert(tk.END,"Debug ON\n")
+        self.txt.insert(tk.END,"[Debug ON]\n")
 
     def menu_option2(self):
         self.myDebug = False
         messagebox.showinfo("Debug mode","Debug OFF")
-        self.txt.insert(tk.END,"Debug OFF\n")
+        self.txt.insert(tk.END,"[Debug OFF]\n")
         
     def menu_help(self):
         help_message = self.title + " " + self.version
@@ -125,7 +126,7 @@ class GuiApp:
         messagebox.showinfo('FILE NAME is ...',filename)
         self.filename = filename
         self.logPrintln('FILE NAME is ' + filename )
-        #self.dbgPrintln(self.version)
+        self.dbgPrintln(self.version)
 
     def logPrint(self,str):
         self.txt.insert(tk.END,str)
