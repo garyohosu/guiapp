@@ -124,20 +124,20 @@ class GuiApp:
 
         messagebox.showinfo('FILE NAME is ...',filename)
         self.filename = filename
-        self.logPrintln('FILE NAME is ' + filename + '\n')
+        self.logPrintln('FILE NAME is ' + filename )
         #self.dbgPrintln(self.version)
 
-    def logPrint(sefl,str):
+    def logPrint(self,str):
         self.txt.insert(tk.END,str)
         
-    def logPrintln(sefl,str):
+    def logPrintln(self,str):
         self.logPrint(str + "\n")
 
-    def dbgPrint(sefl,str):
+    def dbgPrint(self,str):
         if self.myDebug == True:
             self.logPrint(str)
         
-    def dbgPrintln(sefl,str):
+    def dbgPrintln(self,str):
         self.dbgPrint(str + "\n")
 
 if __name__ == "__main__":
