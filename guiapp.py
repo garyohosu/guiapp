@@ -15,6 +15,7 @@ import tkinter as tk
 from tkinter import Menu
 from tkinter import messagebox
 from tkinter.font import Font
+from tkinter import filedialog as tkFileDialog
 
 class GuiApp:
 
@@ -42,9 +43,9 @@ class GuiApp:
         menu_bar.add_cascade(label="Files",menu=file_menu)
 
         opt_menu = Menu(menu_bar,tearoff=0)
-        opt_menu.add_command(label="Option1",command = lambda:self.menu_option1())
+        opt_menu.add_command(label="Debug On",command = lambda:self.menu_option1())
         opt_menu.add_separator()
-        opt_menu.add_command(label="Option2",command = lambda:self.menu_option2())
+        opt_menu.add_command(label="Debug Off",command = lambda:self.menu_option2())
         menu_bar.add_cascade(label="Options",menu=opt_menu)
 
         help_menu = Menu(menu_bar,tearoff=0)
@@ -93,24 +94,51 @@ class GuiApp:
         self.txt.insert(tk.END,"message\n")
 
     def menu_new(self):
-        messagebox.showinfo("title","new")
-        self.txt.insert(tk.END,"new\n")
+        self.file_select()
 
     def menu_clear(self):
         self.txt.delete(1.0,tk.END)
 
     def menu_option1(self):
-        messagebox.showinfo("title","option1")
-        self.txt.insert(tk.END,"option1\n")
+        self.myDebug = True
+        messagebox.showinfo("Debug mode","Debug ON")
+        self.txt.insert(tk.END,"Debug ON\n")
 
     def menu_option2(self):
-        messagebox.showinfo("title","option2")
-        self.txt.insert(tk.END,"option2\n")
+        self.myDebug = False
+        messagebox.showinfo("Debug mode","Debug OFF")
+        self.txt.insert(tk.END,"Debug OFF\n")
         
     def menu_help(self):
         help_message = self.title + " " + self.version
         self.txt.insert(tk.END,"\n" + help_message + "\n")
+
+    def file_select(self):
+        fTyp=[('テキストファイル','*.txt')]
+        #複数のタイプを指定することも可能。
+
+        iDir='/home/ユーザ名/'  #iDir='c:/' #Windows
+
+        #askopenfilename 一つのファイルを選択する。
+        filename=tkFileDialog.askopenfilename(filetypes=fTyp,initialdir=iDir) 
+
+        messagebox.showinfo('FILE NAME is ...',filename)
+        self.filename = filename
+        self.logPrintln('FILE NAME is ' + filename + '\n')
+        #self.dbgPrintln(self.version)
+
+    def logPrint(sefl,str):
+        self.txt.insert(tk.END,str)
         
+    def logPrintln(sefl,str):
+        self.logPrint(str + "\n")
+
+    def dbgPrint(sefl,str):
+        if self.myDebug == True:
+            self.logPrint(str)
+        
+    def dbgPrintln(sefl,str):
+        self.dbgPrint(str + "\n")
 
 if __name__ == "__main__":
     ga = GuiApp()
