@@ -1,16 +1,14 @@
 #!/usr/bin/python3
 
-#===========================================================
-#
-# Python GUI Appication
-#
-# Python3 OS:Windows or Linux
-#
-# Date       Version Name    Comment
-# 2019/07/11 0.00    Hantani New
-#
-#===========================================================
+"""
+ Python GUI Appication
 
+ Python3 OS:Windows or Linux
+
+ Date       Version Name    Comment
+ 2019/07/11 0.00    Hantani New
+
+"""
 import tkinter as tk
 from tkinter import Menu
 from tkinter import messagebox
