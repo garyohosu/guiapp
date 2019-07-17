@@ -9,11 +9,13 @@
  2019/07/11 0.00    Hantani New
 
 """
+import subprocess
 import tkinter as tk
 from tkinter import Menu
 from tkinter import messagebox
 from tkinter.font import Font
 from tkinter import filedialog as tkFileDialog
+import tkinter.simpledialog as inputBox
 
 class GuiApp:
 
@@ -51,6 +53,9 @@ class GuiApp:
         help_menu.add_command(label="Help",command = lambda:self.menu_help())
         menu_bar.add_cascade(label="Help",menu=help_menu)
 
+        shell_menu = Menu(menu_bar,tearoff=0)
+        shell_menu.add_command(label="Shell",command = lambda:self.menu_shell())
+        menu_bar.add_cascade(label="Shell",menu=shell_menu)
 
         #window
         self.root.minsize(100, 100)
@@ -111,6 +116,10 @@ class GuiApp:
     def menu_help(self):
         help_message = self.title + " " + self.version
         self.txt.insert(tk.END,"\n" + help_message + "\n")
+
+    def menu_shell(self):
+        inputdata = inputBox.askstring("Input Box", "コマンドを入力してください",)
+        self.logPrintln(subprocess.getoutput(inputdata))
 
     def file_select(self):
         fTyp=[('テキストファイル','*.txt')]
