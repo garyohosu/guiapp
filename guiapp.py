@@ -120,9 +120,9 @@ class GuiApp:
     def menu_help(self):
         help_message = self.title + " " + self.version
         self.logPrintln("\n" + help_message )
+        self.logPrintln("python " +sys.version )
         self.logPrintln("os.name:" + os.name)
         self.logPrintln("platform.platform():" + platform.platform() )
-        self.logPrintln("python " +sys.version )
 
     def menu_shell(self):
         inputdata = inputBox.askstring("Input Box", "コマンドを入力してください",)
