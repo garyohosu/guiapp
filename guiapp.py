@@ -24,7 +24,7 @@ import tkinter.simpledialog as inputBox
 class GuiApp:
 
     def __init__(self):
-        self.version = "Ver0.00"
+        self.version = "Ver0.01"
         self.title="Paramater Checker"
         self.myDebug = False
         self.main()
