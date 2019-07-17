@@ -7,8 +7,12 @@
 
  Date       Version Name    Comment
  2019/07/11 0.00    Hantani New
+ 2019/07/17 0.01    Hantani シェル機能追加。helpでOSとPythonバージョン表示追加
 
 """
+import os
+import platform
+import sys
 import subprocess
 import tkinter as tk
 from tkinter import Menu
@@ -49,13 +53,13 @@ class GuiApp:
         opt_menu.add_command(label="Debug Off",command = lambda:self.menu_option2())
         menu_bar.add_cascade(label="Options",menu=opt_menu)
 
-        help_menu = Menu(menu_bar,tearoff=0)
-        help_menu.add_command(label="Help",command = lambda:self.menu_help())
-        menu_bar.add_cascade(label="Help",menu=help_menu)
-
         shell_menu = Menu(menu_bar,tearoff=0)
         shell_menu.add_command(label="Shell",command = lambda:self.menu_shell())
         menu_bar.add_cascade(label="Shell",menu=shell_menu)
+
+        help_menu = Menu(menu_bar,tearoff=0)
+        help_menu.add_command(label="Help",command = lambda:self.menu_help())
+        menu_bar.add_cascade(label="Help",menu=help_menu)
 
         #window
         self.root.minsize(100, 100)
@@ -115,7 +119,10 @@ class GuiApp:
         
     def menu_help(self):
         help_message = self.title + " " + self.version
-        self.txt.insert(tk.END,"\n" + help_message + "\n")
+        self.logPrintln("\n" + help_message )
+        self.logPrintln("os.name:" + os.name)
+        self.logPrintln("platform.platform():" + platform.platform() )
+        self.logPrintln("python " +sys.version )
 
     def menu_shell(self):
         inputdata = inputBox.askstring("Input Box", "コマンドを入力してください",)
